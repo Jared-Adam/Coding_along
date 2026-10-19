@@ -20,10 +20,14 @@ seeds <- SeedPredation_JA
 seeds
 
 # clean ####
+# TODO : assign elevations via bands
+  # convert elevation to meters
+  # visualize 
 
-# broken 10/19/2026
+
+
+# complete code below ####
 seeds %>% 
-  select(-1,-2) %>% 
   mutate(el = case_when(band == '1' ~ '5400',
                         band == '2' ~'6150',
                         band == '3' ~ '6320',
@@ -63,8 +67,7 @@ ggsave("SeedPred_Dish.pdf",
        dpi = 600)
 
 
-stick <- seeds %>% 
-  select(-1,-2) %>% 
+stick <- seeds %>%
   mutate(el = case_when(band == '1' ~ '5400',
                         band == '2' ~'6150',
                         band == '3' ~ '6320',
