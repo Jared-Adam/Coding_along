@@ -19,15 +19,54 @@ library(here)
 seeds <- SeedPredation_JA
 seeds
 
+
+
 # clean ####
 # TODO : assign elevations via bands
   # convert elevation to meters
   # visualize 
 
+# functions we will use for this:
+?mutate
+?relocate
+?ggplot
+
+# how do we create sequential changes to our df?
+  # piping lines of code together using the pipe operator %>% (ctl shift m / cmd shift m)
+  # this operates in a literal such that the code will break if your operations are incorrectly placed
+
+# broken example
+seeds %>% 
+  select(-3) %>% 
+  relocate(band)
+
+# correct example
+
+seeds %>% 
+  select(-2) %>% 
+  relocate(band)
+
+# Nesting 
+colnames(seeds)
+
+seeds %>% 
+  select(3:8) %>% # selecting the rows I want to look at
+  group_by(band, present_d_ct, site) %>% # grouping by df by certain variables so I extract a mean
+  mutate(new = mean(present_d_ct)) %>% # creating a new column and extracting mean (NEST)
+  relocate(new) %>% # I want to see my new column in the first row 
+  print(n = Inf) # I want to see the whole new df. N = whatever value you want
+
+# why does this not work?
+seeds %>% 
+  select(3:8) %>% 
+  group_by(band, present_d_ct, site) %>% 
+  mutate(new <- mean(present_d_ct)) %>% 
+  relocate(new)
+
 
 
 # complete code below ####
-seeds %>% 
+seeds %>% # pipe operator 
   mutate(el = case_when(band == '1' ~ '5400',
                         band == '2' ~'6150',
                         band == '3' ~ '6320',
