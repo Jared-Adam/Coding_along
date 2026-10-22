@@ -41,7 +41,6 @@ seeds %>%
   relocate(band)
 
 # correct example
-
 seeds %>% 
   select(-2) %>% 
   relocate(band)
