@@ -1,55 +1,47 @@
-# 1: what is programming?
-
-# basic R operations ####
+# 1: Intro to  programming ####
 
 # annotate vs
-annotate
+annotate # I can annotate after code and it will still run 
+
+this is code!
+this is code! # blah blah blah
+# this is an annotation
 
 
-# 2. operations
-# do this in the console too
+# 2: Operations ####
+# R is a calculator! 
+# Run all of these below (ctrl + enter OR cmd + enter)
+# PS: To run code, you can either have your cursor in the code or highlight the whole block, both will work!
+2+2
 2+2
 (2+2)
 (2+2)*2
 (2+2)*2*2
 (2+2)*(2*2)
 
-
-
-
-# 3: creating variables 
+# 3: Creating variables ####
+# We can store as many variables as our computer has storage 
 number <- 2
 another = 2
 numbers <- c(1,2,3,4,5)
 test <- 'x'
 same <- "x"
+
+# why will the commented out code below work?
 # wrong <- "x'
 
+# 4: Order of operations ####
 
+# What happens when our code is out of order?
 ex <- x # broken
 # concatanate: link or join separate things
 x <- c(1,2,3) # object
 ex <- x # name change
 
 
-# matrix
-m1 <- matrix(c(1 ,2, # putting spaces and indents can help read code, personal preference 
-               2, 1), nrow = 2, byrow = TRUE)
-
-same <- matrix(c(1,2,2,1), nrow = 2, byrow = TRUE)
-
-# what can we do with a matrix?
-# example: matrix algebra for population growth 
-library(popbio)
-# lambda is the asymtopic population trend
-# >1 = growing 
-lambda(m1)
 
 
-
-
-
-# 4: types of data
+# 5: Types of data ####
 
 # numeric
 a <- 10
@@ -67,7 +59,7 @@ class(c)
 
 # integer : whole number without any fractional or decimal parts
 d <- 10L # (must be appened with an L)
-d <- 10S 
+d <- 10S # why does this not work?
 
 
 # complex:
@@ -77,10 +69,14 @@ class(x)
 
 
 
-# 5: name philosophy
+# 6: Name philosophy ####
+
 CamelCase <- c('x','y','z')
 under_score <- c('x','y','z')
 how-about-this <- c('x','y','z')
+# Can I start with a a number?
+2026_seed_data <- x
+
 
 # be explicit and not overly verbose
 ThisIsTooMuchText <- c(x,y,z)
@@ -89,88 +85,103 @@ df <- c("not", "enough", "text")
 # REMEMBER: prgoramming is writing in another language so do what feels right 
 # but ensure your code is reproducibe and legible by others
 
-# let's create a fake df 
-bugs <- data.frame(
-  spiders = rnorm(200),
-  beetles = rnorm(250),
-  wasps = rnorm(1000)
-)
 
+# 7: Functions! ####
 
-
-
-
-
-
-
-# 6. FUNCTIONS
 # base r arithmetic functions
 min(numbers)
 max(numbers)
 mean(numbers)
 
-# the dollar operator 
+# A small fake data set to look at 
+bugs <- data.frame( # data.frame is a function used to structure a data
+  spiders = rnorm(200), # rnorm is telling these values to follow a normal distribution 
+  beetles = rnorm(250),
+  wasps = rnorm(1000)
+)
+
+# Run just the name of the df (dataframe) to see what it looks like
+bugs
+
+# What type of object is "bugs"?
+class(bugs)
+
+## Answer:
+
+
+# What if I want to look at a specific column within a df?
+# The dollar ($) operator !
 mean(bugs$spiders)
 
+## Answer: 
 
-
-# 5.1 Informative functions
+# How do I know the names of my columns?
 colnames(bugs)
 
-# removal 
+## Answer: 
 
-ex
-rm(ex)
+# What about the object type for a specific column?
+class(bugs$spiders)
 
+## Answer: 
 
-# maybe skip !!
-# we can write our own functions too
+# What if I want to remove a variable? 
+# There is a function for that!
+rm(bugs) # note how it is no longer is your session
 
-function_name <- (x){
-
-  mean(x)
-
-}
-
-function_name(x)
-
-# "nesting" functions
- # we can put functions inside of other functions, example to follow
-
-
-
-
-# 7. information / help
+# 8: Information / help ####
 
 ?mean
 ?mutate
 
-# loading packages ####
+# loading packages 
+# TWO functions needed for this
+# Install.packages only needs to be used ONCE!
+  # Then the information is always on your computer
 install.packages("tidyverse")
+
+# Library must be used everytime you open R
+# It is common practice for keep all of your packages at the top of your script so you can do it first thing when you begin each session 
 library(tidyverse)
 
 ?tidyverse
 ?mutate
 
-# how to bring in data ####
-# many ways, no wrong one
-# https://idahoagstats.github.io/r-for-ag-scientists/lessons/data-import.html
+# 9: DATA ####
 
-# I use local docs and the here() package
+# There are built in data sets in R
+# This is my favorite 
+?penguins
 
-# OR you can identify the path on your computer
-getwd()
-setwd()
-
-
-
-# ok great, what else can we do? ####
-# R has built in data sets for you to mess with ####
-
-# my favorite is: palmerpenguins
+# Let's look at it:
 penguins
 
-# Can make plots ####
+
+
+
+# How to bring in data of your own
+# Many ways, no wrong one
+# This is a helpful link
+# https://idahoagstats.github.io/r-for-ag-scientists/lessons/data-import.html
+
+# What we need to do is identify the directory in which your data is stored
+# R names this location your "Working Directory"
+# Hence, the functions associated with this process are:
+getwd() # What does R think my current wd is?
+setwd() # If I want to change it
+
+
+
+###
+##
+#
+# What else can R do?
+# Run some of the code below to see! 
+
+
+# 10: Can make plots ####
+install.packages("tidyverse")
+library(tidyverse)
 penguins %>% 
   ggplot(aes(x = flipper_len,
                            y = body_mass)) +
@@ -180,7 +191,12 @@ penguins %>%
              alpha = 0.8)
 
 
-# Can make art ####
+# 11: Can make art ####
+
+# You can highlight everything below and run it at once! 
+# Or run each code block in order
+
+install.packages("RColorBrewer")
 library(RColorBrewer)
 
 # DOTS
@@ -301,7 +317,8 @@ circle_now %>%
   coord_polar() # warps plot into a wheel
 
 
-# And mazes ####
+# 12: And mazes ####
+install.packages("mazing")
 library(mazing)
 m <- maze(35,100)
 plot(m, lwd = 2)
