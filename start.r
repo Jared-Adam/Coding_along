@@ -5,12 +5,17 @@
 # annotate vs
 annotate
 
-# 2: logical operations
+
+# 2. operations
+# do this in the console too
 2+2
 (2+2)
 (2+2)*2
 (2+2)*2*2
 (2+2)*(2*2)
+
+
+
 
 # 3: creating variables 
 number <- 2
@@ -22,8 +27,10 @@ same <- "x"
 
 
 ex <- x # broken
+# concatanate: link or join separate things
 x <- c(1,2,3) # object
 ex <- x # name change
+
 
 # matrix
 m1 <- matrix(c(1 ,2, # putting spaces and indents can help read code, personal preference 
@@ -39,7 +46,38 @@ library(popbio)
 lambda(m1)
 
 
-# 4: name philosophy
+
+
+
+# 4: types of data
+
+# numeric
+a <- 10
+class(a)
+
+# character/ string 
+b <- "lettuce get rowdy"
+class(b)
+
+# logical 
+c <- TRUE
+class(c)
+
+# LESS common:
+
+# integer : whole number without any fractional or decimal parts
+d <- 10L # (must be appened with an L)
+d <- 10S 
+
+
+# complex:
+x <- 7i
+class(x)
+
+
+
+
+# 5: name philosophy
 CamelCase <- c('x','y','z')
 under_score <- c('x','y','z')
 how-about-this <- c('x','y','z')
@@ -51,17 +89,41 @@ df <- c("not", "enough", "text")
 # REMEMBER: prgoramming is writing in another language so do what feels right 
 # but ensure your code is reproducibe and legible by others
 
+# let's create a fake df 
+bugs <- data.frame(
+  spiders = rnorm(200),
+  beetles = rnorm(250),
+  wasps = rnorm(1000)
+)
 
-# 5. FUNCTIONS
+
+
+
+
+
+
+
+# 6. FUNCTIONS
 # base r arithmetic functions
 min(numbers)
 max(numbers)
 mean(numbers)
 
+# the dollar operator 
+mean(bugs$spiders)
+
+
 
 # 5.1 Informative functions
-colnames()
+colnames(bugs)
 
+# removal 
+
+ex
+rm(ex)
+
+
+# maybe skip !!
 # we can write our own functions too
 
 function_name <- (x){
@@ -78,7 +140,7 @@ function_name(x)
 
 
 
-# 6. information / help
+# 7. information / help
 
 ?mean
 ?mutate
