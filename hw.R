@@ -66,6 +66,10 @@
       penguins %>% 
         filter( year < 2007) # Is LESS than 2007
 
+
+
+
+
 # 2. What is the output for when year is less than 2007? Why?
     # Hint: Which years are recorded?
     # Use a function to justify your answer 
